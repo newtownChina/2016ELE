@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>[地点]</title>
+  <style type="text/css">
+	*{margin:0;padding:0;}
+	a{color:white;text-decoration:none;}
+	html,body{font-family:"微软雅黑";font-size:14px;width:100%;height:900px;background:#F7F7F7;}
+	/*顶部导航条*/
+	.head_nav{background:#1E89E0;width:100%;height:60px;}
+	.head_nav .logo{background:url("images/ele.png") no-repeat 80px 0;width:230px;height:60px;float:left;}
+	.head_nav .nav{width:510px;height:60px;float:left;}
+	.head_nav .nav ul{width:510px;height:60px;list-style:none;}
+	.head_nav .nav ul li{height:20px;float:left;padding:20px 35px;font-size:16px;color:white;}
+	.head_nav .servers{background:url("images/servers.png") no-repeat;height:60px;float:left;width:350px;}
+	.head_nav .regAndLogin{width:250px;height:60px;float:left;}
+	.head_nav .regAndLogin span#first{display:inline-block;width:30px;height:30px;float:left;margin:22px 0 0 80px;font-size:15px;color:white;}
+	.head_nav .regAndLogin span#second{display:inline-block;width:80px;height:30px;float:left;margin:22px 0 0 5px;font-size:15px;color:white;}
+	/*位置信息*/
+	.location{width:1185px;margin:0 auto;height:50px;}
+	.location .loc_left{width:600px;height:50px;line-height:50px;font-size:13px;color:#aaa;float:left;}
+	.location .loc_right{width:585px;height:50px;float:right;}
+	.location .loc_right input{width:300px;height:30px;margin-top:10px;float:right;outline:none;padding-left:5px;}
+	/*轮播图*/
+	.banners{width:1185px;height:100px;margin:0 auto;background:red;overflow:hidden;position:relative;}
+	.banners ul#ban{list-style:none;width:1185px;height:400px;}
+	.banners ul#ban li{width:1185px;height:100px;}
+	.banners ul#ban li img{}
+	.banners div#ban_btn{width:80;height:20px;position:absolute;right:20px;bottom:5px;z-index:999;}
+	.banners div#ban_btn ul{width:80;height:20px;list-style:none;}
+	.banners div#ban_btn ul li{width:16px;height:20px;float:left;text-align:center;background:#fff;opacity:0.5;filter:alpha(opacity=0.5);margin:0 2px;cursor:pointer;}
+	/*店铺分类*/
+	.classify{width:1185px;height:155px;margin:0 auto;}/*带背景图。右上角趴着的小孩*/
+	.classify .c{width:1185px;height:100px;float:left;margin-top:55px;box-shadow:0 -1px 0 #ddd;border:1px solid #ddd;}
+	.classify .c #c_top{width:100%;height:60px;background:#fff;}
+	.classify .c #c_top	span#c_t_l{width:100px;height:60px;display:block;margin:0 auto;text-align:center;line-height:60px;float:left;}
+	.classify .c #c_top ul#c_t_r{list-style:none;float:left;height:60px;}
+	.classify .c #c_top ul#c_t_r li{float:left;height:26px;line-height:26px;text-align:center;margin:17px 8px;padding:0 7px;border-radius:3px;cursor:pointer;}
+	.classify .c #c_top ul#c_t_r li:hover{background:#f6f6f6;}
+	.classify .c #c_bottom{background:#F5F5F5;width:1185px;height:40px;}
+	.classify .c #c_bottom  div#c_b_l{float:left;height:40px;}
+	.classify .c #c_bottom  div#c_b_l span{padding:20px;line-height:40px;}
+	.classify .c #c_bottom  div#c_b_l a{color:#666;padding:0 10px;cursor:pointer;}
+	.classify .c #c_bottom  div#c_b_l a#highSales{}
+	.classify .c #c_bottom  div#c_b_l a#highEval{}
+	.classify .c #c_bottom  div#c_b_l a#otherSort{}
+	.classify .c #c_bottom  div#c_b_r{float:right;}
+	.classify .c #c_bottom  div#c_b_r{}
+	.classify .c #c_bottom  div#c_b_r{}
+	/*品牌店铺*/
+	.brands{width:1165px;margin:10px auto;background:##FFFDEE;line-height: 40px;padding: 0 10px;background-color:#fffdee;border: 1px solid #FFFDEE;height:40px;}
+	/*所有店铺*/
+	.allShops{width:1185px;margin:0 auto;}
+	.allShops ul#all{list-style:none;}
+	.allShops ul#all li{width:296px;height:140px;float:left;position:relative;}
+	.allShops ul#all li div.details{width:300px;height:250px;position:absolute;z-index:999;right:-300px;top:0;background:url("images/details.png");display:none;}
+	.allShops ul#all li:hover{background:#F3F3F3;}
+	.allShops ul#all li:hover div.details{display:block;}
+	.allShops ul#all li .a_s_l{width:100px;height:140px;float:left;}
+	.allShops ul#all li .a_s_l div.up_half{width:100px;height:100px;}
+	.allShops ul#all li .a_s_l div.up_half img{margin:20px 20px;}
+	.allShops ul#all li .a_s_l .down_half{width:100px;height:40px;text-align:center;line-height:20px;}
+
+	.allShops ul#all li .a_s_r{float:left;}
+	.allShops ul#all li .a_s_r .row_1{padding:20px 20px 10px 20px;font-size:16px;font-weight:bold;}
+	.allShops ul#all li .a_s_r .row_2{padding:3px 20px;font-size:12px;}
+	.allShops ul#all li .a_s_r .row_3{padding:3px 20px;font-size:12px;}
+	.allShops ul#all li .a_s_r .row_4{padding:3px 20px;}
+	/*底部信息*/
+	.footer{width:100%;height:285px;background:url("images/footer.png") no-repeat;clear:both;}
+	/*右侧快捷栏*/
+	.shortcutBar{width:32px;height:100%;position:fixed;right:0;top:0;background:#504D53;}
+	.shortcutBar div{width:32px;height:32px;background:#fff;}
+	.shortcutBar div#order{margin-top:115px;}
+	.shortcutBar div#cart{margin-top:25px;}
+	.shortcutBar div#myInfo{margin-top:25px;}
+	.shortcutBar div#history{margin-top:25px;}
+	.shortcutBar div#qrCode{margin-top:190px;}
+	.shortcutBar div#customService{margin-top:25px;}
+  </style>
+ </head>
+ <body ondragstart="return false">
+	<div class="head_nav">
+		<div class="logo"></div>
+		<div class="nav">
+			<ul>
+				<li>首页</li>
+				<li>品牌商家</li>
+				<li>我的订单</li>
+				<li>加盟合作</li>
+			</ul>
+		</div>
+		<div class="servers"></div>
+		<div class="regAndLogin">
+			<span id="first">头</span>
+			<span id="second">注册/登录</span>		
+		</div>
+	</div>
+	<div class="location">
+		<div class="loc_left">当前位置: <var>普陀区武宁小城旁(中山北路/兰田路路口南)</var><a href="javascript:void(0)">[切换地址]</a></div>
+		<div class="loc_right"><input type="text" placeholder="搜索商家,美食..."></div>
+	</div>
+	<div class="banners">
+		<ul id="ban">
+			<li><img width="1185" height="100" alt="轮播图" src="images/banner_1.webp" /></li>
+			<li><img width="1185" height="100" alt="轮播图" src="images/banner_2.webp" /></li>
+			<li><img width="1185" height="100" alt="轮播图" src="images/banner_3.webp" /></li>
+			<li><img width="1185" height="100" alt="轮播图" src="images/banner_4.webp" /></li>
+		</ul>
+		<div id="ban_btn">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+		</div>
+	</div>
+	<div class="classify">
+		<div class="c">
+			<div id="c_top">
+				<span id="c_t_l">商家分类:</span>
+				<ul id="c_t_r">
+					<li>全部商家</li>
+					<li>品牌商家</li>
+					<li>快餐便当</li>
+					<li>特色菜系</li>
+					<li>异国料理</li>
+
+					<li>小吃夜宵</li>
+					<li>甜品饮品</li>
+					<li>果蔬生鲜</li>
+					<li>鲜花蛋糕</li>
+					<li>商店超市</li>
+				</ul>
+			</div>
+			<div id="c_bottom">
+				<div id="c_b_l">
+					<span>默认排序</span>
+					<a id="highSales">销量高</a>
+					<a id="highEval">评价好</a>
+					<a id="otherSort">其它排序</a>
+					<a>起送价格:不限</a>
+				</div>
+				<div id="c_b_r">
+					<input id="c_1" type="checkbox">
+					<label for="c_1">新开商家</label>
+					<input id="c_2" type="checkbox">
+					<label for="c_2">免配送费</label>
+					<input id="c_3" type="checkbox">
+					<label for="c_3">蜂鸟专送</label>
+					<input id="c_4" type="checkbox">
+					<label for="c_4">可开发票</label>
+					<input id="c_5" type="checkbox">
+					<label for="c_5">在线支付</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--品牌商家-->
+	<div class="brands">
+		<span>想吃好点的，看看附近&nbsp;<var >72家</var>&nbsp;品牌商家吧，<a href="javascript:void(0)">立即查看</a></span>
+	</div>
+	<div class="allShops">
+		<ul id="all">
+			<!--根据后台数据循环添加li-->
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+				<div class="details"></div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+				<div class="details"></div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+				<div class="details"></div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+			</li>
+			<li>
+				<div class="a_s_l">
+					<div class="up_half"><img width="70" height="70" alt="店铺logo" src="https://fuss10.elemecdn.com/e/fa/f254bef6894407107457e7fe8535djpeg.jpeg" /></div>
+					<div class="down_half">40分钟</div>
+				</div>
+				<div class="a_s_r">
+					<div class="row_1">肯德基宅急送</div>
+					<div class="row_2">月售826单</div>
+					<div class="row_3">0元起送/配送费9元</div>
+					<div class="row_4">减 票</div>
+				</div>
+			</li>
+		</ul>
+		
+	</div>
+	<div class="footer"></div>
+	<!--右侧快捷栏-->
+	<div class="shortcutBar">
+		<div id="order"></div>
+		<div id="cart"></div>
+		<div id="myInfo"></div>
+		<div id="history"></div>
+		<div id="qrCode"></div>
+		<div id="customService"></div>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#ban_btn ul li").click(function(){
+				/*按钮颜色*/
+				$(this).css({
+					"color":"white",
+					"backgroundColor":"#ff6000"
+				}).siblings().css({
+					"color":"#000",
+					"backgroundColor":"#fff"
+				});
+				var _index = $(this).index();
+				$("ul#ban").animate({
+					marginTop:(-100*_index)+"px"
+				},300);
+			});
+		})
+	</script>
+ </body>
+</html>
