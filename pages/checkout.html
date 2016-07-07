@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+	<head>
+		<!--声明当前页面的编码集：charset=gbk,gb2312(中文编码)，utf-8国际编码-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!--当前页面的三要素-->
+		<title>订单信息</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			a{text-decoration:none;color:#fff}
+			ul,li{list-style:none}
+			body{font-size:14px;font-family:"微软雅黑";color:#fff;background-color:#f7f7f7;}
+			/*头部*/
+			.c_header{width:100%;height:31px;background-color:#0089dc;border-bottom:1px solid #027ecb;}
+			.c_header .c_nav{width:1180px;margin:0 auto;font-size:12px;line-height:30px;}
+			.c_header .c_nav .c_nav_path{}
+			.up{width:100%;}
+			/*身体头部*/
+			.up .up_top{width:100%;height:96px;background-color:#0089dc;}
+			.up .up_top .t_container{width:1180px;height:41px;margin:0 auto;font-size:14px;padding-top:15px;}
+			.up .up_top .t_container .c_logo{display:inline-block;}
+			.up .up_top .t_container .c_logo .l_icon{background:url('images/ele.png') no-repeat 0px -6px;width:136px;height:41px;display:inline-block;vertical-align:text-bottom;}
+			.up .up_top .t_container .l_text{width:119px;height:50px;font-size:26px;vertical-align: text-bottom;}
+			/*身体下部*/
+			.up .up_container{width:1180px;height:955px;margin:0 auto;font-size:14px;position:relative;}
+			.up .up_container .c_left{float:left;width:34%;background-color:#fff;margin-top:12px;position:absolute;left:0px;top:0px;}
+			.up .up_container .c_left .l_cont{border:1px solid #e0e0e0;line-height:1;border-bottom:0;background:url('images/bot.png') bottom repeat-x;}
+			.up .up_container .c_left .l_cont .c_title{position:relative;padding:20px;height:20px;border-bottom:1px solid #eee;}
+			.up .up_container .c_left .l_cont .c_title h2{font-size:16px;font-weight:700;color:#333;}
+			.up .up_container .c_left .l_cont .c_title a{position:absolute;top:22px;font-size:12px;color:#666;right:28px;}
+			.up .up_container .c_left .l_cont .c_tablehead{font-size:12px;font-weight:700;color:#999; height:48px;width:362px;line-height:48px;padding:0 18px 0 20px;}
+			.up .up_container .c_left .l_cont .c_tablehead .t_name{width:40%;padding-left:10px;display:inline-block;}
+			.up .up_container .c_left .l_cont .c_tablehead .t_count{width:30%;text-align:center;display:inline-block;}
+			.up .up_container .c_left .l_cont .c_tablehead .t_total{width:25%;display:inline-block;text-align:right;}
+			.up .up_container .c_left .l_cont .c_group .g_grouptitle{border-bottom:1px solid #eee;padding-left:30px;height:48px;line-height:48px;font-size:14px;font-weight:700;color:#333;}
+			.up .up_container .c_left .l_cont .c_group .g_scope .s_tabrow{background-color:#fcfaf8;height:48px;line-height:48px;color:#666;padding:0 18px 0 20px;font-size:14px;}
+			.up .up_container .c_left .l_cont .t_itemname{width:45%;font-size:12px;display:inline-block;color:#666;}
+			.up .up_container .c_left .l_cont .c_group .g_scope .s_tabrow .t_quantity {width:30%;text-align:center;display:inline-block;}
+			.up .up_container .c_left .l_cont .c_group .g_scope .s_tabrow .t_quantity button{cursor:pointer;display:inline-block;background-color:#fff;width:24px;height:24px;outline:none;border:1px solid #eee;}
+			.up .up_container .c_left .l_cont .c_group .g_scope .s_tabrow .t_quantity .q_valid{display:inline-block;width:26px;height:24px;border:0;outline:none;border-top:1px solid #eee;border-bottom:1px solid #eee;text-align:center;}
+			.up .up_container .c_left .l_cont .c_group .g_scope .s_tabrow .t_total{display:inline-block;width:22%;text-align:right;}
+			.up .up_container .c_left .l_cont .c_message{width:100%;height:41px;}
+			.up .up_container .c_left .l_cont .c_message .m_estra{width:100%;height:41px;}
+			.up .up_container .c_left .l_cont .c_message .m_estra .e_name{padding:5px 0 3px 21px;}
+			.up .up_container .c_left .l_cont .c_message .m_estra .e_quantity{width:20%;display:inline-block;}
+			.up .up_container .c_left .l_cont .c_message .m_estra .e_total{width:22%;display:inline-block;padding-right:10px;text-align:right;color:#666;font-size:12px;line-height:41px;}
+			.up .up_container .c_left .l_cont .c_total{color:#f74342;font-size:24px;text-align:right;width:100%;display:block;margin:0 auto;}
+			.up .up_container .c_left .l_cont .c_total div{color:#f74342;font-size:46px;text-align:right;display:inline-block;padding:25px 20px 15px 0px;}
+			.up .up_container .c_left .l_cont .c_extra{font-size:12px;color:#666;padding:0 30px 22px;text-align:right;}
+			.up .up_container .c_left .l_cont .c_extra span{margin-right:4px;}
+
+			.up .up_container .c_right{width:60%;float:right;border:1px solid #e0e0e0;margin-top:12px;height:750px;padding:25px 20px 150px 30px;position:absolute;right:0;top:0;background-color:#fff;}
+		.up .up_container .c_right .r_title{margin-bottom:40px;}
+		.up .up_container .c_right .r_title h2{color:#333;font-size:16px;font-weight:700;margin-bottom:15px;}
+		.up .up_container .c_right .r_title a{background:#f1f1f1;color:#666;line-height:72px;text-align:center;display:block;}
+		.up .up_container .c_right .r_select{margin-bottom:40px;}
+		.up .up_container .c_right .r_select h2{color:#333;font-size:16px;font-weight:700;margin-bottom:15px;}
+		.up .up_container .c_right .r_select h2 span{color:#ff9c00;margin-left:16px;font-weight:400;font-size:12px;}
+		.up .up_container .c_right .r_select ul{height:70px;}
+		.up .up_container .c_right .r_select ul li{color:#333;font-size:14px;border:1px solid #eee;float:left;padding:11px 20px;width:43.2%;}
+		.up .up_container .c_right .r_select ul .s_u1{background:url('images/foot.png') right bottom no-repeat;float:left;border-color:#0089dc;cursor:pointer;margin-right:1.6%;}
+		.up .up_container .c_right .r_select ul p{margin-bottom:4px;}
+		.up .up_container .c_right .r_select ul .u_p{color:#999;}
+		.up .up_container .c_right .r_select ul .s_u2{background-color:#f9f9f9;border:1px solid #eee;}
+		.up .up_container .c_right .r_select .s_info{margin-bottom:20px;}
+		.up .up_container .c_right .r_select .s_info .i_pan1{font-size:14px;display:inline-block;text-align:right;margin-right:1em;color:#333;}
+		.up .up_container .c_right .r_select .s_info .i_pan2,.i_pan4{color:#999;}
+		.up .up_container .c_right .r_select .s_info .i_pan3{display:inline-block;text-align:right;margin-right:20px;color:#333;font-size:14px;width:5em;}
+		.up .up_container .c_right .r_select .s_info .i_pan4 em{color:#f74342;font-size:14px;font-weight:400;font-style:normal;}
+		.up .up_container .c_right .r_select .s_info .i_pan5{font-size:14px;color:#333;}
+		.up .up_container .c_right .r_select .s_info .i_pan5 a{color:#0089dc;}
+		.up .up_container .c_right .r_select .s_info .i_form{display:inline-block;position:relative;width:150px;color:#333;}
+		.up .up_container .c_right .r_select .s_info .i_form span{display:block;padding-left:8px;line-height:39px;border:1px solid #e0e0e0;color:#666;}
+		.up .up_container .c_right .r_select .s_info .i_pan6 input{background-color:#eee;padding:5px 10px;width:230px;border:1px solid #e0e0e0;outline:none;color:#666;}
+		.up .up_container .c_right .r_select .s_info .i_pan6 .p_inpu{background-color:#fff;}
+		.up .up_container .c_right div .btn{background-color:#f74342;color:#fff;font-size:16px;padding:12px 30px;border-radius:2px;outline:none;cursor:pointer;text-align:center;border:none;}
+		</style>
+
+	</head>
+<body>
+	<div class="content">
+		<div class="c_header">
+			<div class="c_nav">
+				<span class="c_nav_path">当前位置：
+					<a href="#">红旗区大学城新乡医学院图书馆</a>
+					<a href="#">吃米</a>
+					订单信息
+				</span>
+			</div>
+		</div>
+		<div class="up">
+			<div class="up_top">
+				<div class="t_container">
+					<a class="c_logo" href="#" >
+						<i class="l_icon"></i>
+					</a>
+					<span class="l_text">订单信息</span>
+				</div>
+			</div>
+			<div class="up_container">
+				<div class="c_left">
+					<div class="l_cont">
+						<div class="c_title">
+							<h2>订单详情</h2>
+							<a href="#">&lt;返回商家修改</a>
+						</div>
+						<div class="c_tablehead">
+							<div class="t_name">商品</div>
+							<div class="t_count">份数</div>
+							<div class="t_total">小计（元）</div>
+						</div>
+		
+						<dl class="c_group">
+							<dt class="g_grouptitle">1号购物车</dt>
+							<dd class="g_scope">
+								<div class="s_tabrow">
+									<div class="t_itemname">米</div>
+									<div class="t_quantity">
+										<button type="button" >-</button>
+										<input type="text" class="q_valid" value="1" >
+										<button type="button">+</button>
+									</div>
+									<div class="t_total">￥1.00</div>
+								</div>
+							</dd>
+							<dd class="g_scope">
+								<div class="s_tabrow">
+									<div class="t_itemname">西红柿炒鸡蛋</div>
+									<div class="t_quantity">
+										<button type="button" >-</button>
+										<input type="text" class="q_valid" value="1" >
+										<button type="button">+</button>
+									</div>
+									<div class="t_total">￥1.00</div>
+								</div>
+							</dd>
+						</dl>
+						<ul class="c_message">
+							<li class="m_estra">
+								<div class="t_itemname e_name">配送费</div>
+								<div class="e_quantity"></div>
+								<div class="e_total">￥0.00</div>
+							</li>
+						</ul>
+						<div class="c_total">￥
+							<div>11.00</div>
+						</div>
+						<div class="c_extra">共
+							<span>2</span>份商品
+						</div>
+					</div>
+				</div>
+		<style type="text/css">
+		
+		</style>
+				<div class="c_right">
+					<div class="r_title">
+						<h2>收货地址</h2>
+						<a href="">+添加新地址</a>
+					</div>
+					<div class="r_select">
+						<h2>付款方式
+							<span>推荐使用在线支付，不用找零，优惠更多</span>
+						</h2>
+						<ul>
+							<li class="s_u1">
+								<p>在线支付</p>
+								<p class="u_p">支持微信、支付宝、QQ钱包及大部分银行卡</p>
+							</li>
+							<li class="s_u2">
+								<p>货到付款</p>
+								<p class="u_p">送货上门后再付款</p>
+							</li>
+						</ul>
+					</div>
+					<div class="r_select">
+						<h2>选择优惠</h2>
+						<p class="s_info">
+							<span class="i_pan1">使用红包</span>
+							<span class="i_pan2">无可用红包</span>
+						</p>
+						<p class="s_info">
+							<span class="i_pan3">使用优惠券</span>
+							<span class="i_pan4">网站不支持
+								<em>（仅手机客户端可用）</em>
+							</span>
+						</p>
+					</div>
+					<div class="r_select">
+						<h2>其他信息</h2>
+						<div class="s_info">
+							<span class="i_pan1">配送方式</span>
+							<span class="i_pan5">本订单由
+								<a href="#"> [蜂鸟专送] </a> 提供配送
+							</span>
+						</div>
+						<div class="s_info">
+							<span class="i_pan1">送达时间</span>
+							<div class="i_form">
+								<span>立即送达</span>
+							</div>
+						</div>
+						<div class="s_info">
+							<span class="i_pan1">发票信息</span>
+							<span class="i_pan6">
+								<input placeholder="商家不支持开发票">
+							</span>
+						</div>
+						<div class="s_info">
+							<span class="i_pan1">订单备注</span>
+							<span class="i_pan6">
+								<input type="text" class="p_inpu">
+							</span>
+						</div>
+					</div>
+					<div>
+						<input type="button" value="确认下单" class="btn">
+						<div ></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	<style type="text/css">
+		.footer{border-top:1px solid #eee;margin-top:50px;background-color:#f7f7f7;color:#333;}
+	</style>
+		<div class="footer"> 
+			<img src="images/footer.png">
+		</div>
+		
+	</div>
+</body>
+</html>
