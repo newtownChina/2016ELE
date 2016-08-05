@@ -1,15 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="Keywords" content="饿了么,店铺详情">
   <meta name="Description" content="饿了么店铺页面">
-  <title>[这里填写当前店铺名]</title>
+  <title>${shop.name}</title>
   <link type="text/css" rel="stylesheet" href="iconfont/iconfont.css" />
   <link type="text/css" rel="stylesheet" href="css/shop.css" />
  </head>
@@ -163,105 +159,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 			/*添加到购物车*/
 			$(".describe a").click(function(){
-				forbidAddSameGood();
+				alert(1);
 				var gid = $(this).data("gid");
 				var name = $(this).data("name");
 				var price = $(this).data("price");
-				$(".up_cont").append("<div class='mygoods' data-gid="+gid+">"+name+"<div class='minus'>&#45</div><div class='num'>1</div><div class='plus'>&#43</div><div class='price'>"+"￥"+price+"</div></div>");
+				var htmlToCart ="<div class='mygoods' data-gid="+gid+" data-price="+price+">"+name+"<div class='minus' onclick='minus(this)'>&#45</div><div class='num'>1</div><div class='plus' onclick='plus(this)'>&#43</div><div class='price'>"+"￥"+price+"</div></div>";
+				$(".up_cont").append(htmlToCart);
 				$(".up").stop().css({
 					"height":"+=41px"
 				});
-				minus();
-				plus();
-			});
-			/*购物车的商品减少事件*/
-			function minus(){
-				/*从购物车删除*/
-				var goodsNum = $(".mygoods").length;
-				$(".minus").last().click(function(){
-					var num = $(this).siblings(".num").text();
-					var n = parseInt(num);
-					if(n==1){
-						$(this).parent().remove();
-						$(".up").stop().css({
-							"height":"-=41px"
-						});
-					}else{
-						--n;
-					}
-					$(this).siblings(".num").text(n);
-					if(window.sessionStorage){
-						/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
-						var gid = $(this).parent().data("gid");
-						var goodListHtml = $(this).parent().html();
-						/*var date = new Date();
-						console.log(date.getMilliseconds());*/
-						sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='1'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
-						console.log(sessionStorage.getItem("gid"+gid));
-					}
-					if(goodsNum < 1){
-						$(".down_right a").text("购物车是空 ").css({
-							"color":"#111",
-							"background":"#E4E4E4"
-						});
-						$(".up").css("height","0");
-					}
-				});
-			}
-			/*购物车的商品增加事件*/
-			function plus(){
-				var goodsNum = $(".mygoods").length;
-				$(".plus").last().click(function(){
-					var num = $(this).siblings(".num").text();
-					var n = parseInt(num);
-					n+=1;
-					$(this).siblings(".num").text(n);
-					if(window.sessionStorage){
-						/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
-						var gid = $(this).parent().data("gid");
-						var goodListHtml = $(this).parent().html();
-						/*var date = new Date();
-						console.log(date.getMilliseconds());*/
-						sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='1'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
-						console.log(sessionStorage.getItem("gid"+gid));
-					}
-				});
-				if(goodsNum > 0){
-					$(".down_right a").text("去结算").css({
-						"background":"#51D862",
-						"color":"white"
-					});
-					//备用，防止鼠标点击过快，使得高度增加到应有高度。
-					$(".up").css("height",(goodsNum+1)*41+"px");//本身高41px，多+1
+				if(window.sessionStorage){
+					//点击按钮的时候，添加到购物车，也添加到sessionStorage
+					sessionStorage.setItem("gid"+gid,htmlToCart);//保证每个商品对应不同的gidkey，用于添加不同的商品
 				}
-			}
+				forbidAddSameGood();
+				ifCartEmpty();
+			});
 			/*清空购物车*/
 			$(".up_left a").click(function(){
 				$(".up_cont").empty();
-				$(".up").css("height","0");
-				/*购物车文字显示为空*/
-				$(".down_right a").text("购物车是空 ").css({
-					"color":"#111",
-					"background":"#E4E4E4"
-				});
-				$(".up").css("height","0");
+				ifCartEmpty();
+				sessionStorage.clear();
+				forbidAddSameGood();
 			});
-			function forbidAddSameGood(){
-				/*当重新加载了当前页面的时候，仍禁止商品列表按钮以防止添加重复的商品*/
-				var food_display_num = $(".food_display .describe").length;//所有陈列的商品数
-				var item_num = sessionStorage.length;//会话中缓存的商品数
-				var food_display_gid;
-				for(var i = 0;i < food_display_num;i++){
-					var food_display_gid = "gid"+$(".food_display .describe").eq(i).find("a").data("gid");
-					for(var j = 0;j < item_num;j++){
-						var key = sessionStorage.key(j);
-						if(food_display_gid == key){
-							$(".food_display .describe").eq(i).find("a").text("已加入").unbind("click");
-						}
-					}
-					/*商品陈列中的gid*/
-				}
-			}
 			forbidAddSameGood();
 			/*向购物车添加session中缓存的已经添加过的商品*/
 			function AddedGoods(){
@@ -269,16 +189,120 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				for(var i = 0;i < item_num;i++){
 					var key = sessionStorage.key(i);
 					var value = sessionStorage.getItem(key);
-					$(".up_cont").html(value);
+					$(".up_cont").append(value);
 					$(".up").stop().css({
 						"height":"+=41px"
 					});
 				}
-				minus();
-				plus();
-				/*商品陈列中的gid*/
+				ifCartEmpty();
 			}
 		});
+		/*购物车的商品减少鼠标事件*/
+		function minus(thisObj){
+			/*从购物车删除*/
+			var num = $(thisObj).siblings(".num").text();
+			var price = $(thisObj).parent().data("price");
+			var n = parseInt(num);
+			if(n==1){
+				$(this).parent().remove();
+				$(".up").stop().css({
+					"height":"-=41px"
+				});
+				--n;
+			}else{
+				--n;
+			}
+			$(thisObj).siblings(".num").text(n);
+			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(1));
+			/*增加商品后重新保存*/
+			if(window.sessionStorage){
+				/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
+				var gid = $(thisObj).parent().data("gid");
+				var price = $(thisObj).parent().data("price");
+				var goodListHtml = $(thisObj).parent().html();
+				/*var date = new Date();
+				console.log(date.getMilliseconds());*/
+				if(n<1){
+					sessionStorage.removeItem("gid"+gid);
+					$(thisObj).parent().remove();
+					forbidAddSameGood();
+				}else{
+					sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='"+gid+"' data-price='"+price+"'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
+				}
+			}
+			ifCartEmpty();
+			forbidAddSameGood();//从购物车删除时可以重新添加
+			
+		}
+		/*购物车的商品增加事件*/
+		function plus(thisObj){
+			var num = $(thisObj).siblings(".num").text();
+			var price = $(thisObj).parent().data("price");
+			var n = parseInt(num);
+			n+=1;
+			$(thisObj).siblings(".num").text(n);
+			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(1));
+			if(window.sessionStorage){
+				/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
+				var gid = $(thisObj).parent().data("gid");
+				var goodListHtml = $(thisObj).parent().html();
+				sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='"+gid+"'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
+			}
+			ifCartEmpty();
+		}
+		function ifCartEmpty(){
+			var goodsNum = $(".mygoods").length;
+			if(goodsNum < 1){
+				$(".down_right a").text("购物车是空的 ").attr("href","javascript:void(0)").css({
+					"color":"#111",
+					"background":"#E4E4E4",
+					"cursor":"default"
+				});
+				$(".up").css("height","0");
+			}else{
+				$(".down_right a").text("去结算").attr("href","doCheckout").css({
+					"background":"#51D862",
+					"color":"white",
+					"cursor":"pointer"
+				});
+				//备用，防止鼠标点击过快，使得高度增加到应有高度。
+				$(".up").css("height",(goodsNum+1)*41+"px");//本身高41px，多+1
+			}
+		}
+		function forbidAddSameGood(){
+			/*sessionStorage中的就是购物车中的，因此可以将sessionStorage看做购物车*/
+			/*当重新加载了当前页面的时候，根据sessionStorage中的商品确定禁止商品列表按钮以防止添加重复的商品*/
+			var food_display_num = $(".food_display .describe").length;//所有陈列的商品数
+			var item_num = sessionStorage.length;//会话中缓存的商品数
+			var food_display_gid;
+			for(var i = 0;i < food_display_num;i++){
+				$(".food_display .describe").eq(i).find("a").text("加入购物车").unbind("click").click(function(){
+					var gid = $(this).data("gid");
+					var name = $(this).data("name");
+					var price = $(this).data("price");
+					var htmlToCart ="<div class='mygoods' data-gid="+gid+" data-price="+price+">"+name+"<div class='minus' onclick='minus(this)'>&#45</div><div class='num'>1</div><div class='plus' onclick='plus(this)'>&#43</div><div class='price'>"+"￥"+price+"</div></div>";
+					$(".up_cont").append(htmlToCart);
+					$(".up").stop().css({
+						"height":"+=41px"
+					});
+					if(window.sessionStorage){
+						//点击按钮的时候，添加到购物车，也添加到sessionStorage
+						sessionStorage.setItem("gid"+gid,htmlToCart);//保证每个商品对应不同的gidkey，用于添加不同的商品
+					}
+					forbidAddSameGood();
+					ifCartEmpty();
+				});
+				food_display_gid = "gid"+$(".food_display .describe").eq(i).find("a").data("gid");
+				for(var j = 0;j < item_num;j++){
+					var key = sessionStorage.key(j);
+					if(food_display_gid == key){
+						$(".food_display .describe").eq(i).find("a").text("已加入").unbind("click");
+						break;
+					}
+				}
+				/*商品陈列中的gid*/
+			}
+		}
 	</script>
  </body>
 </html>
