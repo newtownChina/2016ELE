@@ -1,0 +1,25 @@
+*{margin:0;padding:0;}
+a{text-decoration:none;color:#07d;}
+a:hover{text-decoration:underline;}
+html,body{font-family:"微软雅黑";font-size:14px;width:100%;height:100%;font-size:14px;color:#666;}
+input{border:1px solid #DFE8F2;outline:none;margin-left:8px;padding-left:5px;width:280px;height:35px;font-size:15px;}
+div.logo{width:950px;height:70px;background:url("../images/register.png") no-repeat;margin:0 auto;}
+div.register{width:950px;height:420px;margin:10px auto;position:relative;border:1px solid #DFE8F2;background:#FAFCFE;}
+div.title{font-size:23px;color:#666;position:absolute;left:80px;top:50px;}
+div.username{width:370px;;height:50px;;position:absolute;top:100px;left:130px;}
+div.phoneVeriCode{width:370px;;height:50px;;position:absolute;top:170px;left:115px;}
+div.password{width:370px;;height:50px;;position:absolute;top:240px;left:130px;}
+div.submit{width:360px;;height:50px;;position:absolute;top:295px;left:125px;text-align:right;}
+div.submit input{width:290px;height:40px;background:#3199E8;border-radius:3px;color:#fff;font-family:"微软雅黑";}
+div.agreement{width:290px;;height:50px;;position:absolute;bottom:15px;left:190px;}
+div.agreement a{}
+/*右侧*/
+div.login{width:200px;height:200px;position:absolute;right:110px;top:100px;border-left:1px solid #DFE8F2;padding-left:50px;}
+div.login h3{font-weight:500;font-size:18px;color:#444;}
+div.login p{color:#999;margin-top:15px;font-size:16px;}
+div.login div.partner_login{margin-top:50px;}
+div.login div.partner_login h4{font-weight:400;font-size:16px;}
+div.login div.partner_login a{display:block;float:left;width:50px;height:51px;background-image:url("../images/QW.png");margin:15px 5px;background-repeat:no-repeat;}
+div.login div.partner_login a.second{background-position:-59px 0;}
+/*底部*/
+div.footer{width:860px;height:70px;margin:0 auto;background:url("../images/reg.png") no-repeat;}

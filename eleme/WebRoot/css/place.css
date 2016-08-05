@@ -1,0 +1,91 @@
+*{margin:0;padding:0;}
+a{color:white;text-decoration:none;}
+html,body{font-family:"微软雅黑";font-size:14px;width:100%;height:900px;background:#F7F7F7;}
+/*顶部导航条*/
+.head_nav{background:#1E89E0;width:100%;height:60px;}
+.head_nav .logo{background:url("../images/ele.png") no-repeat 80px 0;width:230px;height:60px;float:left;}
+.head_nav .nav{width:510px;height:60px;float:left;}
+.head_nav .nav ul{width:510px;height:60px;list-style:none;}
+.head_nav .nav ul li{height:20px;float:left;padding:20px 35px;font-size:16px;color:white;position:relative;}
+.head_nav .nav ul li span.iconfont{width:40px;height:20px;display:block;position:absolute;top:0;right:0;font-size:25px;color:#F9413D;}
+.head_nav .servers{background:url("../images/servers.png") no-repeat;height:60px;float:left;width:350px;}
+.head_nav .regAndLogin{width:250px;height:60px;float:left;}
+.head_nav .regAndLogin span#first{display:inline-block;width:30px;height:30px;float:left;margin:24px 0 0 80px;font-size:15px;color:white;}
+.head_nav .regAndLogin span#second{display:inline-block;width:80px;height:30px;float:left;margin:22px 0 0 5px;font-size:15px;color:white;}
+/*位置信息*/
+.location{width:1185px;margin:0 auto;height:50px;}
+.location .loc_left{width:600px;height:50px;line-height:50px;font-size:13px;color:#aaa;float:left;}
+.location .loc_right{width:585px;height:50px;float:right;position:relative;}
+.location .loc_right input{width:300px;height:30px;margin-top:10px;float:right;outline:none;padding-left:5px;}
+.location .loc_right span.iconfont{position:absolute;right:12px;top:12px;font-size:26px;}
+.location .loc_right span.iconfont:hover{color:#1E89E0;}
+/*轮播图*/
+.banners{width:1185px;height:100px;margin:0 auto;background:red;overflow:hidden;position:relative;}
+.banners ul#ban{list-style:none;width:1185px;height:400px;}
+.banners ul#ban li{width:1185px;height:100px;}
+.banners ul#ban li img{}
+.banners div#ban_btn{width:80;height:20px;position:absolute;right:20px;bottom:5px;z-index:888;}
+.banners div#ban_btn ul{width:80;height:20px;list-style:none;}
+.banners div#ban_btn ul li{width:16px;height:20px;float:left;text-align:center;background:#fff;opacity:0.5;filter:alpha(opacity=0.5);margin:0 2px;cursor:pointer;}
+/*店铺分类*/
+.classify{width:1185px;height:155px;margin:0 auto;}/*带背景图。右上角趴着的小孩*/
+.classify .c{width:1185px;height:100px;float:left;margin-top:55px;box-shadow:0 -1px 0 #ddd;border:1px solid #ddd;}
+.classify .c #c_top{width:100%;height:60px;background:#fff;}
+.classify .c #c_top	span#c_t_l{width:100px;height:60px;display:block;margin:0 auto;text-align:center;line-height:60px;float:left;}
+.classify .c #c_top ul#c_t_r{list-style:none;float:left;height:60px;}
+.classify .c #c_top ul#c_t_r li{float:left;height:26px;line-height:26px;text-align:center;margin:17px 8px;padding:0 7px;border-radius:3px;cursor:pointer;}
+.classify .c #c_top ul#c_t_r li:hover{background:#f6f6f6;}
+.classify .c #c_bottom{background:#F5F5F5;width:1185px;height:40px;}
+.classify .c #c_bottom  div#c_b_l{float:left;height:40px;}
+.classify .c #c_bottom  div#c_b_l span{padding:20px;line-height:40px;}
+.classify .c #c_bottom  div#c_b_l a{color:#666;padding:0 10px;cursor:pointer;}
+.classify .c #c_bottom  div#c_b_l a#highSales{}
+.classify .c #c_bottom  div#c_b_l a#highEval{}
+.classify .c #c_bottom  div#c_b_l a#otherSort{}
+.classify .c #c_bottom  div#c_b_r{float:right;}
+.classify .c #c_bottom  div#c_b_r{}
+.classify .c #c_bottom  div#c_b_r{}
+/*品牌店铺*/
+.brands{width:1165px;margin:10px auto;background:##FFFDEE;line-height: 40px;padding: 0 10px;background-color:#fffdee;border: 1px solid #FFFDEE;height:40px;}
+/*所有店铺*/
+.allShops{width:1185px;margin:0 auto;}
+.allShops a{color:#111;}
+.allShops ul#all{list-style:none;}
+.allShops ul#all li{width:296px;height:140px;float:left;position:relative;}
+.allShops ul#all li div.details{width:300px;height:250px;position:absolute;z-index:999;right:-300px;top:0;background:url("../images/details.png");display:none;}
+.allShops ul#all li:hover{background:#F3F3F3;}
+.allShops ul#all li:hover div.details{display:block;}
+.allShops ul#all li .a_s_l{width:100px;height:140px;float:left;}
+.allShops ul#all li .a_s_l div.up_half{width:100px;height:100px;}
+.allShops ul#all li .a_s_l div.up_half img{margin:20px 20px;}
+.allShops ul#all li .a_s_l .down_half{width:100px;height:40px;text-align:center;line-height:20px;}
+
+.allShops ul#all li .a_s_r{float:left;}
+.allShops ul#all li .a_s_r .row_1{padding:20px 20px 10px 20px;font-size:16px;font-weight:bold;}
+.allShops ul#all li .a_s_r .row_2{padding:3px 20px;font-size:12px;}
+.allShops ul#all li .a_s_r .row_3{padding:3px 20px;font-size:12px;}
+.allShops ul#all li .a_s_r .row_4{padding:3px 20px;}
+/*底部信息*/
+.footer{width:100%;height:285px;background:url("../images/footer.png") no-repeat;clear:both;}
+/*右侧快捷栏*/
+.shortcutBar{width:32px;height:100%;position:fixed;right:0;top:0;background:#504D53;z-index:1000;}
+.shortcutBar div{width:32px;height:32px;cursor:pointer;padding:5px 0}
+.shortcutBar div.container{padding:0;}
+.shortcutBar div:hover{background:#1E89E0;}
+.shortcutBar div.container:hover{background:#504D53;}
+.shortcutBar div#order{margin-top:115px;}
+.shortcutBar div#order span{font-size:25px;text-align:center;display:block;width:32px;height:32px;color:#eee;}
+.shortcutBar div#cart{margin-top:25px;height:90px;width:32px;text-align:center;word-break:break-word;font-size:16px;}
+.shortcutBar div#cart b{display:block;width:20px;text-align:center;word-break:break-word;font-size:14px;margin:0 auto;color:#eee;font-weight:400;}
+.shortcutBar div#cart span{font-size:18px;text-align:center;display:block;width:32px;height:32px;color:#eee;}
+.shortcutBar div#myInfo{margin-top:25px;line-height:30px;}
+.shortcutBar div#myInfo span{font-size:18px;text-align:center;display:block;width:32px;height:32px;color:#eee;}
+.shortcutBar div#history{margin-top:25px;}
+.shortcutBar div#history span{font-size:19px;text-align:center;display:block;width:32px;height:32px;color:#eee;line-height:30px;}
+.shortcutBar div#qrCode{margin-top:120px;}
+.shortcutBar div#qrCode span{font-size:20px;text-align:center;display:block;width:32px;height:32px;color:#eee;line-height:30px;}
+.shortcutBar div#customService{margin-top:25px;}
+.shortcutBar div#customService span{font-size:20px;text-align:center;display:block;width:32px;height:32px;color:#eee;line-height:30px;}
+.shortcutBarCont{width:250px;;height:100%;background:#fff;position:fixed;right:-250px;top:0;z-index:1000;overflow:hidden;}
+.shortcutBarCont .s_t{width:100%;height:30px;font-size:15px;text-align:left;line-height:30px;font-weight:500;}
+.shortcutBarCont .s_b{width:100%;height:100%;margin-top:10px;background:#E6E6E6;}

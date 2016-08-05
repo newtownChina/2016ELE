@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>eleme</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 处理乱码的filter -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>cn.mldn.ele.filter.CharacterEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+  <!-- 处理注册的servlet -->
+   <servlet>
+   	<servlet-name>doRegServlet</servlet-name>
+   	<servlet-class>cn.mldn.ele.controller.DoRegController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>doRegServlet</servlet-name>
+	<url-pattern>/doReg</url-pattern>
+   </servlet-mapping>
+   <!-- 处理登录的servlet -->
+   <servlet>
+   	<servlet-name>doLoginServlet</servlet-name>
+   	<servlet-class>cn.mldn.ele.controller.DoLoginController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>doLoginServlet</servlet-name>
+	<url-pattern>/doLogin</url-pattern>
+   </servlet-mapping>
+   <!-- 处理所有店铺的servlet -->
+   <servlet>
+   	<servlet-name>doPlace</servlet-name>
+   	<servlet-class>cn.mldn.ele.controller.DoPlaceController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>doPlace</servlet-name>
+	<url-pattern>/doPlace</url-pattern>
+   </servlet-mapping>
+   <!-- 处理单个店铺的servlet -->
+   <servlet>
+   	<servlet-name>doShop</servlet-name>
+   	<servlet-class>cn.mldn.ele.controller.DoShopController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>doShop</servlet-name>
+	<url-pattern>/doShop</url-pattern>
+   </servlet-mapping>
+   <!-- 处理订单提交的servlet -->
+    <servlet>
+   	<servlet-name>doCheckout</servlet-name>
+   	<servlet-class>cn.mldn.ele.controller.DoCheckoutController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>doCheckout</servlet-name>
+	<url-pattern>/doCheckout</url-pattern>
+   </servlet-mapping>
+</web-app>

@@ -1,0 +1,43 @@
+ *{margin:0;padding:0;}
+ body,html{width:100%;height:100%;font-size:14px;font-family:"微软雅黑";}
+ /*头部logo*/
+ div.logo{width:950px;height:70px;background:url("../images/register.png") no-repeat;margin:0 auto;}
+ div.login{width:1000px;height:500px;margin:10px auto;}
+ /*左侧*/
+ div.login div.l_left{width:450px;height:450px;background:url("../images/l_left.png") no-repeat;background-size:contain;margin:30px 0 0 55px;float:left;}
+ /*右侧*/
+ div.login div.l_window{width:330px;height:450px;border:1px solid #D3E1F1;margin:30px 0 0 50px;float:left;background:#FAFCFE;}
+ div.login div.l_window div{width:280px;height:42px;margin:10px auto;}
+ div.login div.l_window div input{width:230px;height:40px;outline:none;padding-left:50px;border:1px solid #D3E1F1;font-size:15px;}
+ div.login div.l_window div.title{width:280px;height:40px;margin:30px auto 0 auto;}
+ div.login div.l_window div.title span{font-weight:400;font-size:24px;}
+ div.login div.l_window div.title a{float:right;text-decoration:none;color:#666;line-height:45px;}
+ div.login div.l_window div.title span.iconfont{float:right;font-size:16px;line-height:43px;margin-left:4px;}
+ div.login div.l_window div.username{position:relative;}
+ div.login div.l_window div.username span{width:30px;height:30px;position:absolute;left:6px;top:6px;font-size:20px;display:block;background:#eee;
+ text-align:center;line-height:30px;color:#666;border-radius:3px;}
+ div.login div.l_window div.password{position:relative;}
+ div.login div.l_window div.password span{width:30px;height:30px;position:absolute;left:6px;top:6px;font-size:20px;display:block;background:#eee;
+ text-align:center;line-height:27px;color:#666;border-radius:3px;}
+ div.login div.l_window div.verify_code{width:2800px;margin-left:25px;}
+ div.login div.l_window div.verify_code input{width:130px;padding-left:10px;float:left;}
+ div.login div.l_window div.verify_code img{float:left}
+ div.login div.l_window div.verify_code a{display:block;width:50px;height:50px;float:left;font-size:12px;margin:5px;text-decoration:none;color:#666;}
+ div.login div.l_window div.verify_code a:hover{text-decoration:underline;}
+ div.login div.l_window div.auto_login{font-size:13px;}
+ div.login div.l_window div.auto_login input{width:13px;height:13px;line-height:15px;}
+ div.login div.l_window div.login_btn{border-radius:3px;padding-left:0;margin-top:-10px;}
+ div.login div.l_window div.login_btn input{width:280px;background:#3199E8;border-radius:4px;padding-left:0;letter-spacing:5px;font-family:"微软雅黑";color:#fff;cursor:pointer;}
+ div.login div.l_window div.newUser_forgotPdw{height:32px;}
+ div.login div.l_window div.newUser_forgotPdw a{color:#0f97ea;text-decoration:none;}
+ div.login div.l_window div.newUser_forgotPdw a:hover{text-decoration:underline;}
+ div.login div.l_window div.newUser_forgotPdw a.new{float:left;}
+ div.login div.l_window div.newUser_forgotPdw a.fgt{float:right;}
+ div.login div.l_window div.partner_login{margin:0 auto;}
+ div.login div.l_window div.partner_login h4{margin:0 auto;width:280px;height:20px;font-weight:200;font-size:12px;border-top:1px solid #DFE8F2;text-align:center;}
+ div.login div.l_window div.partner_login h4 span{margin:-7px auto;display:inline-block;width:150px;background:#FAFCFE;}
+ div.login div.l_window div.partner_login div.icon{width:100px;height:31px;margin:0 auto;}
+ div.login div.l_window div.partner_login div.icon a{width:30px;height:30px;display:block;float:left;background:url(../"images/QW.png") no-repeat;background-size:cover;margin-left:13px;}
+ div.login div.l_window div.partner_login div.icon a#second{background-position:-34px; 0}
+ /*底部*/
+ div.footer{width:860px;height:70px;margin:0 auto;background:url("../images/reg.png") no-repeat;}
