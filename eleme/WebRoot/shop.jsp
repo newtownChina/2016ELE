@@ -213,7 +213,7 @@
 				--n;
 			}
 			$(thisObj).siblings(".num").text(n);
-			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(1));
+			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(2));
 			/*增加商品后重新保存*/
 			if(window.sessionStorage){
 				/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
@@ -241,12 +241,12 @@
 			var n = parseInt(num);
 			n+=1;
 			$(thisObj).siblings(".num").text(n);
-			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(1));
+			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(2));
 			if(window.sessionStorage){
 				/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
 				var gid = $(thisObj).parent().data("gid");
 				var goodListHtml = $(thisObj).parent().html();
-				sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='"+gid+"'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
+				sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='"+gid+"' data-price='"+price+"'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
 			}
 			ifCartEmpty();
 		}

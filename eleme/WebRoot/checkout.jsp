@@ -1,8 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html>
@@ -14,6 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta name="Keywords" content="关键词,关键词">
 		<meta name="description" content="">
 		<link href="css/checkout.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			.footer{border-top:1px solid #eee;margin-top:50px;background-color:#f7f7f7;color:#333;}
+		</style>
 	</head>
 <body>
 	<div class="content">
@@ -40,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="l_cont">
 						<div class="c_title">
 							<h2>订单详情</h2>
-							<a href="#">&lt;返回商家修改</a>
+							<a href="javascript:history.go(-1)">&lt;返回商家修改</a>
 						</div>
 						<div class="c_tablehead">
 							<div class="t_name">商品</div>
@@ -49,39 +48,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 		
 						<dl class="c_group">
-							<dt class="g_grouptitle">1号购物车</dt>
 							<dd class="g_scope">
-								<div class="s_tabrow">
-									<div class="t_itemname">米</div>
-									<div class="t_quantity">
-										<button type="button" >-</button>
-										<input type="text" class="q_valid" value="1" >
-										<button type="button">+</button>
-									</div>
-									<div class="t_total">￥1.00</div>
-								</div>
-							</dd>
-							<dd class="g_scope">
-								<div class="s_tabrow">
-									<div class="t_itemname">西红柿炒鸡蛋</div>
-									<div class="t_quantity">
-										<button type="button" >-</button>
-										<input type="text" class="q_valid" value="1" >
-										<button type="button">+</button>
-									</div>
-									<div class="t_total">￥1.00</div>
-								</div>
-							</dd>
+							</dd>	
 						</dl>
 						<ul class="c_message">
 							<li class="m_estra">
 								<div class="t_itemname e_name">配送费</div>
-								<div class="e_quantity"></div>
 								<div class="e_total">￥0.00</div>
 							</li>
 						</ul>
 						<div class="c_total">￥
-							<div>11.00</div>
+							<div>0.00</div>
 						</div>
 						<div class="c_extra">共
 							<span>2</span>份商品
@@ -152,22 +129,88 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<div>
-						<input type="button" value="确认下单" class="btn">
-						<div ></div>
+						<a class="btn" href="profile.jsp">确认下单</a>
 					</div>
-
 				</div>
 			</div>
 		</div>
-	<style type="text/css">
-		.footer{border-top:1px solid #eee;margin-top:50px;background-color:#f7f7f7;color:#333;}
-	</style>
 		<div class="footer"> 
 			<img src="images/footer.png">
 		</div>
 	</div>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
-		alert(sessionStorage.getItem("gid"));
+		$(function(){
+			if(window.sessionStorage){
+				var len = sessionStorage.length;
+				var key;
+				for(var i = 0;i < len ;i++){
+					key = sessionStorage.key(i);
+					$(".g_scope").append(sessionStorage.getItem(key));
+				}
+			}
+			calTotalFee();
+		});
+		/*购物车的商品减少鼠标事件*/
+		function minus(thisObj){
+			/*从购物车删除*/
+			var num = $(thisObj).siblings(".num").text();
+			var price = $(thisObj).parent().data("price");
+			var n = parseInt(num);
+			if(n==1){
+				$(this).parent().remove();
+				--n;
+			}else{
+				--n;
+			}
+			$(thisObj).siblings(".num").text(n);
+			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(2));
+			/*增加商品后重新保存*/
+			if(window.sessionStorage){
+				/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
+				var gid = $(thisObj).parent().data("gid");
+				var price = $(thisObj).parent().data("price");
+				var goodListHtml = $(thisObj).parent().html();
+				if(n<1){
+					sessionStorage.removeItem("gid"+gid);
+					$(thisObj).parent().remove();
+				}else{
+					sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='"+gid+"' data-price='"+price+"'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
+				}
+			}
+			calTotalFee();
+		}
+		/*购物车的商品增加事件*/
+		function plus(thisObj){
+			var num = $(thisObj).siblings(".num").text();
+			var price = $(thisObj).parent().data("price");
+			var n = parseInt(num);
+			n+=1;
+			$(thisObj).siblings(".num").text(n);
+			$(thisObj).siblings(".price").text("￥"+(n*parseFloat(price)).toFixed(2));
+			if(window.sessionStorage){
+				/*将当前商品的gid加入sessionStorage，如果key相同只会保留最后一个*/
+				var gid = $(thisObj).parent().data("gid");
+				var goodListHtml = $(thisObj).parent().html();
+				sessionStorage.setItem("gid"+gid,"<div class='mygoods' data-gid='"+gid+"' data-price='"+price+"'>"+goodListHtml+"</div>");//保证每个商品对应不同的gidkey，用于添加不同的商品
+			}
+			calTotalFee();
+		}
+		//刚进入页面的时候就要计算总价格
+		function calTotalFee(){
+			var totalFee = 0;
+			var price = 0;
+			//运费
+			var transCost = 0;
+			var len = $(".price").length;
+			for(var i=0;i < len;i++){
+				var numString =$(".price").eq(i).text().substring(1);
+				price += parseFloat(numString);//保留一位小数
+			}
+			transCost = parseFloat($(".e_total").text().substring(1));
+			totalFee = (price+transCost).toFixed(2);
+			$(".c_total div").text(totalFee);
+		}
 	</script>
 </body>
 </html>
